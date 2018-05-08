@@ -129,15 +129,28 @@ public class MonthMapCreator {
 		listOfYear.add(year);
 	}
 
+	private boolean hasValue(int year, List<Month> monthList) {
+		for (Month month : monthList) {
+			if (month.year == year)
+				return true;
+		}
+		return false;
+	}
+
 	public void prettyPrint2() {
 		for (int day : monthMap.keySet()) {
 			System.out.println("Months for " + day + " Days in given year \n");
 			for (int year : listOfYear) {
-				for (Month month : (List<Month>) monthMap.get(day)) {
-					if (month.year == year)
-						System.out.print(month + "  ");
+				List<Month> monthList = (List<Month>) monthMap.get(day);
+				if (hasValue(year, monthList)) {
+					for (Month month : monthList) {
+						if (monthList != null && monthList.size() > 0) {
+							if (month.year == year)
+								System.out.print(month + "  ");
+						}
+					}
+					System.out.println();
 				}
-				System.out.println();
 			}
 			System.out.println();
 		}
